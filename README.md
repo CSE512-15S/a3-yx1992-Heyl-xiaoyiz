@@ -22,6 +22,10 @@
 
 
 ## Development Process
+Important string:
+GDPindicator="NY.GDP.MKTP.PP.CD"
+populationindicator="SP.POP.TOTL"
+should write down these data in easy-to-use format
 
 Include:
 - Breakdown of how the work was split among the group members. 
