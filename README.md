@@ -24,7 +24,7 @@
 ## Development Process
 Important string:
 --GDPindicator="NY.GDP.MKTP.PP.CD"
-use (current US$) "NY.GDP.MKTP.CD"
+use (current US$) "NY.GDP.MKTP.CD"  1960-2013
 populationindicator="SP.POP.TOTL"
 should write down these data in easy-to-use format
 
