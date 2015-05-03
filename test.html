@@ -12,13 +12,34 @@
 </head>
 
 <body> 
+    <button id="auto_slide_button">Auto Slide</button>
+    <button id="stop_auto_slide_button">Stop Slide</button>
     <div id="slider"></div>
     <div id="slider_value"></div>
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
 
     <script>
-
     var year = "1960";
+    var auto_slide_interval;
+
+    $(function() {
+      $("#auto_slide_button").click(function()
+        {
+            auto_slide_interval = setInterval(increment, 400);
+            $("#slider" ).slider( "option", "value", year);
+        }
+      );
+      $("#stop_auto_slide_button").click(function()
+        {
+            clearInterval(auto_slide_interval);
+        }
+      );
+    });
+
+    function increment() {
+        year++;
+        $("#slider" ).slider( "option", "value", year);
+    }
 
     var m_map = new Datamap({
         element: document.getElementById('container'),
