@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
-<body> 
-
+<head>
+    <meta charset="utf-8" />
+    <title>Datamap GDP</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js"></script>
+</head>
+
+<body> 
+    <div id="slider"></div>
+    <div id="slider_value"></div>
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
 
     <script>
 
-    var year = 2012;
-    year = year.toString();
-    
     var m_map = new Datamap({
         element: document.getElementById('container'),
 
@@ -38,29 +44,47 @@
 
     var bucketLimits = [1E+04,1E+05,1E+06,1E+07,1E+08,1E+09,1E+10,1E+11];
 
-    d3.csv("GDP.csv", function(error, csvdata1) {
+    function refreshSwatch() {
+        var year;
+        year = $("#slider").slider("value");
+        year = year.toString();
 
-        for (var i=0;i<csvdata1.length;i++) { 
-            csvdata1[i].fillKey = {};
+        $("#slider_value").text(year);
 
-            var GDP_value = csvdata1[i][year];
+        d3.csv("GDP.csv", function(error, csvdata1) {
 
-            if (GDP_value < bucketLimits[0]) {  csvdata1[i].fillKey = '0'; }
-            if (GDP_value >= bucketLimits[0] && GDP_value < bucketLimits[1]) {  csvdata1[i].fillKey = '1'; }
-            if (GDP_value >= bucketLimits[1] && GDP_value < bucketLimits[2]) {  csvdata1[i].fillKey = '2'; }
-            if (GDP_value >= bucketLimits[2] && GDP_value < bucketLimits[3]) {  csvdata1[i].fillKey = '3'; }
-            if (GDP_value >= bucketLimits[3] && GDP_value < bucketLimits[4]) {  csvdata1[i].fillKey = '4'; }
-            if (GDP_value >= bucketLimits[4] && GDP_value < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
-            if (GDP_value >= bucketLimits[5] && GDP_value < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
-            if (GDP_value >= bucketLimits[6] && GDP_value < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
-            if (GDP_value >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
+            for (var i=0;i<csvdata1.length;i++) { 
+                csvdata1[i].fillKey = {};
 
-            csvdata1[csvdata1[i].Code] = csvdata1[i];
-            delete csvdata1[i].Code;
-            delete csvdata1[i];
-        }
-        m_map.updateChoropleth(csvdata1);
+                var GDP_value = csvdata1[i][year];
+
+                if (GDP_value < bucketLimits[0]) {  csvdata1[i].fillKey = '0'; }
+                if (GDP_value >= bucketLimits[0] && GDP_value < bucketLimits[1]) {  csvdata1[i].fillKey = '1'; }
+                if (GDP_value >= bucketLimits[1] && GDP_value < bucketLimits[2]) {  csvdata1[i].fillKey = '2'; }
+                if (GDP_value >= bucketLimits[2] && GDP_value < bucketLimits[3]) {  csvdata1[i].fillKey = '3'; }
+                if (GDP_value >= bucketLimits[3] && GDP_value < bucketLimits[4]) {  csvdata1[i].fillKey = '4'; }
+                if (GDP_value >= bucketLimits[4] && GDP_value < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
+                if (GDP_value >= bucketLimits[5] && GDP_value < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
+                if (GDP_value >= bucketLimits[6] && GDP_value < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
+                if (GDP_value >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
+
+                csvdata1[csvdata1[i].Code] = csvdata1[i];
+                delete csvdata1[i].Code;
+                delete csvdata1[i];
+            }
+            m_map.updateChoropleth(csvdata1);
+        });
+}
+
+$(function() {
+    $("#slider").slider({
+        max: 2013,
+        min: 1960,
+        value: 1960,
+        slide: refreshSwatch,
+        change: refreshSwatch
     });
+});
 
 </script>
 </body>
