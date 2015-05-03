@@ -9,9 +9,13 @@
 
 ## Project Name
 
+World's GDP from 1960 to 2013
 
 
 ## Running Instructions
+
+
+Access our visualization at http://xiaoyizhang.me/512/test.html
 
 
 ## Story Board
