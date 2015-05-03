@@ -2,37 +2,60 @@
 <html>
 <body> 
 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-<script src="http://datamaps.github.io/scripts/datamaps.world.min.js"></script>
-<div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
-<script>
-	var dataset = [];
-	d3.csv("GDP.csv", function(data) {
-   		dataset = data.map(function(d) { return [d["1960"]]; });
-   		console.log(dataset);
-	});
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js"></script>
+    <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
 
-    var map = new Datamap({
-    	element: document.getElementById('container'),
-        fills: {
-            HIGH: '#afafaf',
-            LOW: '#123456',
-            MEDIUM: 'blue',
-            UNKNOWN: 'rgb(0,0,0)',
-            defaultFill: 'green'
-        },
-        data: {
-            IRL: {
-                fillKey: 'LOW',
-                GDP: 2002
-            },
-            USA: {
-                fillKey: 'MEDIUM',
-                GDP: 10381
-            }
+    <script>
+    
+    var m_map = new Datamap({
+        element: document.getElementById('container'),
+
+        geographyConfig: {
+            borderColor: '#BBB',
+            popupTemplate: function(geography, csvdata1) {
+                if (!csvdata1) return;
+                return '<div class="hoverinfo">' + geography.properties.name + '<br> GDP: <strong>' +  csvdata1["1960"] + '</strong>';},
+            },  
+            fills: {
+                '0': "#000",
+                '1': "#222",
+                '2': "#333",
+                '3': "#555",
+                '4': "#777",
+                '5': "#999",
+                '6': "#BBB",
+                '7': "#DDD",
+                '8': "#FFF",
+                defaultFill: 'grey'
+            }, 
+            data: {}
+        });
+
+    var bucketLimits = [1E+04,1E+05,1E+06,1E+07,1E+08,1E+09,1E+10,1E+11];
+
+    d3.csv("GDP.csv", function(error, csvdata1) {
+
+        for (var i=0;i<csvdata1.length;i++) { 
+            csvdata1[i].fillKey = {};
+            if (csvdata1[i]["1960"] < bucketLimits[0]) {  csvdata1[i].fillKey = '0'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[0] && csvdata1[i]["1960"] < bucketLimits[1]) {  csvdata1[i].fillKey = '1'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[1] && csvdata1[i]["1960"] < bucketLimits[2]) {  csvdata1[i].fillKey = '2'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[2] && csvdata1[i]["1960"] < bucketLimits[3]) {  csvdata1[i].fillKey = '3'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[3] && csvdata1[i]["1960"] < bucketLimits[4]) {  csvdata1[i].fillKey = '4'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[4] && csvdata1[i]["1960"] < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[5] && csvdata1[i]["1960"] < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[6] && csvdata1[i]["1960"] < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
+            if (csvdata1[i]["1960"] >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
+
+            csvdata1[csvdata1[i].Code] = csvdata1[i];
+            delete csvdata1[i].Code;
+            delete csvdata1[i];
         }
+        m_map.updateChoropleth(csvdata1);
     });
+
 </script>
 </body>
 </html>
