@@ -8,6 +8,9 @@
     <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
 
     <script>
+
+    var year = 2012;
+    year = year.toString();
     
     var m_map = new Datamap({
         element: document.getElementById('container'),
@@ -16,7 +19,7 @@
             borderColor: '#BBB',
             popupTemplate: function(geography, csvdata1) {
                 if (!csvdata1) return;
-                return '<div class="hoverinfo">' + geography.properties.name + '<br> GDP: <strong>' +  csvdata1["1960"] + '</strong>';},
+                return '<div class="hoverinfo">' + geography.properties.name + '<br> GDP: <strong>' +  csvdata1[year] + '</strong>';},
             },  
             fills: {
                 '0': "#000",
@@ -39,15 +42,18 @@
 
         for (var i=0;i<csvdata1.length;i++) { 
             csvdata1[i].fillKey = {};
-            if (csvdata1[i]["1960"] < bucketLimits[0]) {  csvdata1[i].fillKey = '0'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[0] && csvdata1[i]["1960"] < bucketLimits[1]) {  csvdata1[i].fillKey = '1'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[1] && csvdata1[i]["1960"] < bucketLimits[2]) {  csvdata1[i].fillKey = '2'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[2] && csvdata1[i]["1960"] < bucketLimits[3]) {  csvdata1[i].fillKey = '3'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[3] && csvdata1[i]["1960"] < bucketLimits[4]) {  csvdata1[i].fillKey = '4'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[4] && csvdata1[i]["1960"] < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[5] && csvdata1[i]["1960"] < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[6] && csvdata1[i]["1960"] < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
-            if (csvdata1[i]["1960"] >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
+
+            var GDP_value = csvdata1[i][year];
+
+            if (GDP_value < bucketLimits[0]) {  csvdata1[i].fillKey = '0'; }
+            if (GDP_value >= bucketLimits[0] && GDP_value < bucketLimits[1]) {  csvdata1[i].fillKey = '1'; }
+            if (GDP_value >= bucketLimits[1] && GDP_value < bucketLimits[2]) {  csvdata1[i].fillKey = '2'; }
+            if (GDP_value >= bucketLimits[2] && GDP_value < bucketLimits[3]) {  csvdata1[i].fillKey = '3'; }
+            if (GDP_value >= bucketLimits[3] && GDP_value < bucketLimits[4]) {  csvdata1[i].fillKey = '4'; }
+            if (GDP_value >= bucketLimits[4] && GDP_value < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
+            if (GDP_value >= bucketLimits[5] && GDP_value < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
+            if (GDP_value >= bucketLimits[6] && GDP_value < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
+            if (GDP_value >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
 
             csvdata1[csvdata1[i].Code] = csvdata1[i];
             delete csvdata1[i].Code;
