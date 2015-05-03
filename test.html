@@ -18,38 +18,42 @@
 
     <script>
 
+    var year = "1960";
+
     var m_map = new Datamap({
         element: document.getElementById('container'),
 
+        fills: {
+            '0': "#000",
+            '1': "#222",
+            '2': "#333",
+            '3': "#555",
+            '4': "#777",
+            '5': "#999",
+            '6': "#BBB",
+            '7': "#DDD",
+            '8': "#FFF",
+            defaultFill: 'grey'
+        }, 
+        data: {},
         geographyConfig: {
             borderColor: '#BBB',
             popupTemplate: function(geography, csvdata1) {
                 if (!csvdata1) return;
                 return '<div class="hoverinfo">' + geography.properties.name + '<br> GDP: <strong>' +  csvdata1[year] + '</strong>';},
-            },  
-            fills: {
-                '0': "#000",
-                '1': "#222",
-                '2': "#333",
-                '3': "#555",
-                '4': "#777",
-                '5': "#999",
-                '6': "#BBB",
-                '7': "#DDD",
-                '8': "#FFF",
-                defaultFill: 'grey'
-            }, 
-            data: {}
+            }
         });
 
     var bucketLimits = [1E+04,1E+05,1E+06,1E+07,1E+08,1E+09,1E+10,1E+11];
 
     function refreshSwatch() {
-        var year;
+        
         year = $("#slider").slider("value");
         year = year.toString();
 
         $("#slider_value").text(year);
+
+        console.log(m_map.geographyConfig);
 
         d3.csv("GDP.csv", function(error, csvdata1) {
 
@@ -74,17 +78,19 @@
             }
             m_map.updateChoropleth(csvdata1);
         });
-}
+    }
 
-$(function() {
-    $("#slider").slider({
-        max: 2013,
-        min: 1960,
-        value: 1960,
-        slide: refreshSwatch,
-        change: refreshSwatch
+    $(function() {
+        $("#slider").slider({
+            max: 2013,
+            min: 1960,
+            value: 1960,
+            slide: refreshSwatch,
+            change: refreshSwatch
+        });
+        refreshSwatch();
+
     });
-});
 
 </script>
 </body>
