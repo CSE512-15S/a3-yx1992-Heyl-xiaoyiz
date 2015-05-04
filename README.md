@@ -13,19 +13,23 @@ World's GDP from 1960 to 2013
 
 ### Data set
 
-World Bank data
+World Development Indicators from The World Bank: http://data.worldbank.org/data-catalog/world-development-indicators
 
 ### Description
 
-It is an interactive data visualization that shows the world's GDP (Gross Domestic Product) from 1960 to 2013 on a world map. It is developed for showing and learning world's economy development in the recent half century. It shows each year's world GDP map by sliding the slider or using auto play. Hovering over a country on the map shows that country's GDP detail.
+It is an interactive data visualization that shows the world's GDP (Gross Domestic Product) from 1960 to 2013 on a world map. It is developed for showing and learning world's economy development in the recent half century. 
 
-Domain and techniques
+Domain and Techniques
 
-features
+Map: The data set contains countries' GDP information from 1960 to 2013, in order to show the GDP info for different countries a world map is a good choice, so GDP info can be mapped to each countries. Map also contains geography information, users can see the economy development differences between different continents or different areas, either close to the sea or in the middle of the main land.
 
-Effectness 
+Color: The GDP values vary from less than 1 billion to more than 100,000 billion, so we seperate GDP into 12 different ranges and us Sequential color scale to encode this quantitative data info. To avoid the color distraction of the data visualization we choose one contarin hue, and vary luminance to represent the data. Darker color means higher GDP, ligher color means lower GDP, so users can see the increasment as the time goes on. For color harmony we choose light orange-red, so it won't be too bright and match the whole page design. Color encoding info are labeled on the left bottom to allow user kown the representation of each color. When mouse over each country we choose to use more brighter orange color to highlight the country to bring more attention to the users.
 
-Think about why the domain and the techniques are a good match for one another. Be sure to explain the features of your application. Most importantly you should explain why the interaction techniques you will implement will be effective in the context of your data domain.
+Space: 
+
+Interaction:
+Slider: Sliding the slider block or using auto play mode user can view each years' world GDP map from 1960 to 2013. This allows user to either view perticular year they interested to view the economy development changes over the years.
+Selection: When hovering over a country on the map that country will be hightlighted and country's name and its GDP detail will popover. This give more detail information for the users who wants to learn more about specific country or GDP amount.
 
 ## Running Instructions
 
