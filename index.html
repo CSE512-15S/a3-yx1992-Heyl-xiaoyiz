@@ -4,12 +4,15 @@
     <meta charset="utf-8" />
     <title>Datamap GDP</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="d3.slider.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js"></script>
+    <script src="d3.slider.js"></script>
 </head>
 
 <body> 
@@ -20,23 +23,55 @@
       <p class="intro-text" style="color:#F2EDE7">Money isn't everything, but it can be a good measurement of world's development. Discover how world's economy developed based on world's GDP (Gross Domestic Product) from 1960 to 2013. See each year's world GDP map by sliding the slider, and hover over the country of the map to learn more about each country's GDP detail.</p>
     </div>
     <div style="position:relative; bottom:313px; z-index:0; text-align:center; opacity:.7">
-      <img src="/img/puffpuff.gif">
+      <img src="img/puffpuff.gif">
     </div>
   </header>
   <section id="MAP" class="beige">
     <div id="greca_1"></div>
-    <div style="width:960px; display:block; margin:auto auto;">
-      <button id="auto_slide_button">Auto Slide</button>
-      <button id="stop_auto_slide_button">Stop Slide</button>
-      <div id="slider"></div>
-      <div id="slider_value"></div>
-      <div id="container" style="width: 1000px; height: 700px;"></div>
+    <div style="width:960px; display:block; margin: auto auto">
+        <div id="slider" style="margin:30px 0 0 0" ></div>
+     
+     <div style="margin-top: 50px" >
+        <button type="button" class="btn btn-default" id="auto_slide_button">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+        </button>
+        <button type="button"  class="btn btn-default" id="stop_auto_slide_button">
+            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+        </button>
+        </div>
+      <div id="legend" style="position:absolute; margin-top: 400px"><img src="img/legend.png" height="250"></div>
+      <div id="container" style="position:relative; width: 1000px; height: 700px;"></div>
     </div>
   </section>
+      
 
     <script>
+
     var year = "1960";
     var auto_slide_interval;
+
+    year_slider = d3.slider()
+                .axis(true)
+                .min(1960)
+                .max(2013)
+                .value(1960)
+                .step(1);
+
+    d3.select('#slider').call(year_slider);
+
+    $(function() {
+
+    $("#slider").slider({
+            max: 2013,
+            min: 1960,
+            value: 1960,
+            slide: refreshSwatch,
+            change: refreshSwatch
+    });
+    refreshSwatch();
+        
+    });
+
 
     $(function() {
       $("#auto_slide_button").click(function()
@@ -50,11 +85,12 @@
             clearInterval(auto_slide_interval);
         }
       );
+        
     });
 
     function increment() {
         year++;
-        $("#slider" ).slider( "option", "value", year);
+        $("#slider").slider( "option", "value", year);
     }
 
     var m_map = new Datamap({
@@ -126,18 +162,9 @@
             m_map.updateChoropleth(csvdata1);
         });
     }
+/*
 
-    $(function() {
-        $("#slider").slider({
-            max: 2013,
-            min: 1960,
-            value: 1960,
-            slide: refreshSwatch,
-            change: refreshSwatch
-        });
-        refreshSwatch();
-
-    });
+*/
 
 </script>
 </body>

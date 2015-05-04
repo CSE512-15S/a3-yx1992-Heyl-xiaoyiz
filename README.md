@@ -19,11 +19,13 @@ World Bank data
 
 It is an interactive data visualization that shows the world's GDP (Gross Domestic Product) from 1960 to 2013 on a world map. It is developed for showing and learning world's economy development in the recent half century. It shows each year's world GDP map by sliding the slider or using auto play. Hovering over a country on the map shows that country's GDP detail.
 
-Think about why the domain and the techniques are a good match for one another. Then write a description of the data domain and the interactive visualization application you will build. The description should include a storyboard of the interface/displays you will create. Be sure to explain the features of your application. Most importantly you should explain why the interaction techniques you will implement will be effective in the context of your data domain. The goal of this exercise is to think through the various concerns that go into the software implementation. This is why it is important that you perform this task first, before actually building the software. As part of your prototyping, you may find it helpful to use existing tools (e.g., Tableau or R) to explore the data and test multiple visualization strategies.
+Domain and techniques
 
+features
 
+Effectness 
 
-
+Think about why the domain and the techniques are a good match for one another. Be sure to explain the features of your application. Most importantly you should explain why the interaction techniques you will implement will be effective in the context of your data domain.
 
 ## Running Instructions
 
