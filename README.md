@@ -33,7 +33,7 @@ Selection: When hovering over a country on the map that country will be highligh
 
 ## Running Instructions
 
-Access our visualization at http://xiaoyizhang.me/512/
+Access our visualization at http://xiaoyizhang.me/512/ or http://heyanling.org/project/WorldGDP/
 
 OR
 
