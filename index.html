@@ -47,7 +47,7 @@
 
     <script>
 
-    var year = "1960";
+    var year = 1960;
     var auto_slide_interval;
 
     year_slider = d3.slider()
@@ -55,12 +55,14 @@
                 .min(1960)
                 .max(2013)
                 .value(1960)
-                .step(1);
+                .step(1)
+                .on("slide", refreshSwatch);
 
     d3.select('#slider').call(year_slider);
 
-    $(function() {
 
+    $(function() {
+/*
     $("#slider").slider({
             max: 2013,
             min: 1960,
@@ -68,7 +70,8 @@
             slide: refreshSwatch,
             change: refreshSwatch
     });
-    refreshSwatch();
+*/
+    refreshSwatch(null, year);
         
     });
 
@@ -77,7 +80,7 @@
       $("#auto_slide_button").click(function()
         {
             auto_slide_interval = setInterval(increment, 400);
-            $("#slider" ).slider( "option", "value", year);
+            year_slider.value(year);
         }
       );
       $("#stop_auto_slide_button").click(function()
@@ -90,7 +93,11 @@
 
     function increment() {
         year++;
-        $("#slider").slider( "option", "value", year);
+        refreshSwatch();
+        year_slider.value(year);
+        if (year == 2013) {
+            clearInterval(auto_slide_interval);
+        }
     }
 
     var m_map = new Datamap({
@@ -126,14 +133,11 @@
 
     var bucketLimits = [1, 10E+09, 20E+09, 50E+09, 100E+09, 200E+09, 500E+09, 1000E+09, 2000E+09, 5000E+09, 10000E+09];
 
-    function refreshSwatch() {
-        
-        year = $("#slider").slider("value");
-        year = year.toString();
-
-        $("#slider_value").text(year);
-
-        console.log(m_map.geographyConfig);
+    function refreshSwatch(evt, value) {
+        if(value!=null) {
+            year = value;
+        }
+        //year = year.toString();
 
         d3.csv("GDP.csv", function(error, csvdata1) {
 
