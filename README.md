@@ -43,7 +43,7 @@ Open browser and navigate to http://localhost:8080
 
 ## Story Board
 
-
+![alt tag](http://img/storyboard.jpeg)
 
 ### Changes between Storyboard and the Final Implementation
 
