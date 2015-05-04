@@ -47,7 +47,11 @@ Open browser and navigate to http://localhost:8080
 
 ### Changes between Storyboard and the Final Implementation
 
+During the implementation we found our initial design that slider control panel on the left top will be too short to showing the year information and for user to slide, so we moved it to the top above the map. In this case we can show more year data information. It will also draw user's attention to let them start with playing with it.
 
+There are some spaces on the right bottom of the map, so we put color encoding information there and maximum the map space to highlight the data visualization part.
+
+We also add an introduction about this data visualization, data set and how to use it to guide user how to play with it.
 
 ## Development Process
 Firstly, we browserd the available data sets and searched for interesting ones. For our interested data sets we try to come up a design with it and see if it works well. We select World Bank data sets, since we all interested in knowing about how the world's economy developed among the countries. Xin processed the data to our deired data format. Based on the data selected, we design an interactive data visualization story board. Basically, it is an interactable world map showing world's GDP. Xiaoyi implement the map interaction function. After we got the interactive map works, Yanling changed the webpage and detail design, and write the writup. 
