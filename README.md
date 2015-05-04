@@ -33,7 +33,7 @@ Selection: When hovering over a country on the map that country will be hightlig
 
 ## Running Instructions
 
-Access our visualization at http://xiaoyizhang.me/512/test.html
+Access our visualization at http://xiaoyizhang.me/512/
 
 OR
 
@@ -46,6 +46,7 @@ Open browser and navigate to http://localhost:8080
 
 
 ### Changes between Storyboard and the Final Implementation
+
 
 
 ## Development Process
