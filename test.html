@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Datamap GDP</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -12,11 +13,26 @@
 </head>
 
 <body> 
-    <button id="auto_slide_button">Auto Slide</button>
-    <button id="stop_auto_slide_button">Stop Slide</button>
-    <div id="slider"></div>
-    <div id="slider_value"></div>
-    <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
+  <header id="header" class="dark_grey">
+    <div style="position:relative; z-index:5">
+      <p class="main_title" style="border-top-width:14px;	border-bottom-width:14px;">World's GDP</p>
+      <p class="subtitle" style="color:#F2EDE7">~ from 1960 to 2013 ~</p>
+      <p class="subtitle" style="color:#F2EDE7">Some Introduction Some Introduction Some Introduction Some Introduction</p>
+    </div>
+    <div style="position:relative; bottom:283px; z-index:0; text-align:center; opacity:.7">
+      <img src="/img/puffpuff.gif">
+    </div>
+  </header>
+  <section id="MAP" class="beige">
+    <div id="greca_1"></div>
+    <div style="width:960px; display:block; margin:auto auto;">
+      <button id="auto_slide_button">Auto Slide</button>
+      <button id="stop_auto_slide_button">Stop Slide</button>
+      <div id="slider"></div>
+      <div id="slider_value"></div>
+      <div id="container" style="width: 1000px; height: 800px;"></div>
+    </div>
+  </section>
 
     <script>
     var year = "1960";
@@ -43,6 +59,8 @@
 
     var m_map = new Datamap({
         element: document.getElementById('container'),
+      
+        projection: 'mercator',
 
         fills: {
             '0': "#FFFFFF",
@@ -57,11 +75,11 @@
             '9': "#009900",
             '10': "#336600",
             '11': "#006600",
-            defaultFill: 'grey'
+            defaultFill: '#AAAAAA'
         }, 
         data: {},
         geographyConfig: {
-            borderColor: '#BBB',
+            borderColor: '#DFD6C7',
             popupTemplate: function(geography, csvdata1) {
                 if (!csvdata1) return;
                 return '<div class="hoverinfo">' + geography.properties.name + '<br> GDP: <strong>' +  csvdata1[year] + '</strong>';},
