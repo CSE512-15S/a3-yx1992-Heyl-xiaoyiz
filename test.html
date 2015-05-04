@@ -45,15 +45,18 @@
         element: document.getElementById('container'),
 
         fills: {
-            '0': "#000",
-            '1': "#222",
-            '2': "#333",
-            '3': "#555",
-            '4': "#777",
-            '5': "#999",
-            '6': "#BBB",
-            '7': "#DDD",
-            '8': "#FFF",
+            '0': "#FFFFFF",
+            '1': "#E5FFCC",
+            '2': "#CCFF99",
+            '3': "#B2FF66",
+            '4': "#99FF33",
+            '5': "#80FF00",
+            '6': "#66CC00",
+            '7': "#00CC00",
+            '8': "#4C9900",
+            '9': "#009900",
+            '10': "#336600",
+            '11': "#006600",
             defaultFill: 'grey'
         }, 
         data: {},
@@ -65,7 +68,9 @@
             }
         });
 
-    var bucketLimits = [1E+04,1E+05,1E+06,1E+07,1E+08,1E+09,1E+10,1E+11];
+//    var bucketLimits = [1E+04,1E+05,1E+06,1E+07,1E+08,1E+09,1E+10,1E+11];
+
+    var bucketLimits = [1, 10E+09, 20E+09, 50E+09, 100E+09, 200E+09, 500E+09, 1000E+09, 2000E+09, 5000E+09, 10000E+09];
 
     function refreshSwatch() {
         
@@ -91,7 +96,10 @@
                 if (GDP_value >= bucketLimits[4] && GDP_value < bucketLimits[5]) {  csvdata1[i].fillKey = '5'; }
                 if (GDP_value >= bucketLimits[5] && GDP_value < bucketLimits[6]) {  csvdata1[i].fillKey = '6'; }
                 if (GDP_value >= bucketLimits[6] && GDP_value < bucketLimits[7]) {  csvdata1[i].fillKey = '7'; }
-                if (GDP_value >= bucketLimits[7] ) {  csvdata1[i].fillKey = '8'; }
+                if (GDP_value >= bucketLimits[7] && GDP_value < bucketLimits[8]) {  csvdata1[i].fillKey = '8'; }
+                if (GDP_value >= bucketLimits[8] && GDP_value < bucketLimits[9]) {  csvdata1[i].fillKey = '9'; }
+                if (GDP_value >= bucketLimits[9] && GDP_value < bucketLimits[10]) {  csvdata1[i].fillKey = '10'; }
+                if (GDP_value >= bucketLimits[10] ) {  csvdata1[i].fillKey = '11'; }
 
                 csvdata1[csvdata1[i].Code] = csvdata1[i];
                 delete csvdata1[i].Code;
