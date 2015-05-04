@@ -92,11 +92,12 @@
     });
 
     function increment() {
-        year++;
-        refreshSwatch();
-        year_slider.value(year);
-        if (year == 2013) {
+        if (year >= 2013) {
             clearInterval(auto_slide_interval);
+        } else {
+            year++;
+            refreshSwatch();
+            year_slider.value(year);
         }
     }
 
