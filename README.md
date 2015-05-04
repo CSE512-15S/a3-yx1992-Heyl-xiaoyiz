@@ -45,6 +45,14 @@ Open browser and navigate to http://localhost:8080
 
 ![alt tag](img/storyboard.jpeg)
 
+Scene 1: The title is on the top of the whole visualization. Below the title, we designed control panel and legend on the left using about 1/4 - 1/3 space, map start with the 1960's world GDP information on the right with about 2/3 - 3/4 space. Darker color region on the map means higher GDP. Control panel contains a slider, a play button and a pause button.
+
+Scene 2: When user hit play button, the map will update from the start year to the end year with each year's GDP data. If user hit pause button, the map will stop at that current year. User can also slide the slider control block to navigate to their interested year.
+
+Scene 3: When the map is not in the suto paly mode and the mouse hover over any country, the country will be highlighted with a brighter color. A popover window shows up near the mouse showing country's name and that country's GDP detail of current year.
+
+Scene 4: After implementing some features, we realized if we put the control panel on the left it will be hard to show year information and hard to control, so we move it to the top to increase the slider width and maximum the map size. We also add some introduction for user to learn about this visualization software.
+
 ### Changes between Storyboard and the Final Implementation
 
 During the implementation we found our initial design that slider control panel on the left top will be too short to showing the year information and for user to slide, so we moved it to the top above the map. In this case we can show more year data information. It will also draw user's attention to let them start with playing with it.
